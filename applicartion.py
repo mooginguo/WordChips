@@ -1,23 +1,20 @@
-from flask import Flask,render_template,request
+from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"])
-def main_page():
-    if request.method == 'GET':
-        text = "ここに結果が出力されます"
-        return render_template("page.html",text=text)
-    elif request.method == 'POST':
-        name = request.form["name"]
-        text = "こんにちは" + name + "さん"
-        return render_template("page.html",text=text)
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-@app.route("/abc")
-def main_page1():
-    text = "ここはABCです。"
-    return render_template("page.html",text=text)
+@app.route('/learning')
+def learning():
+    return "学習モードを選択しました"
 
-## 実行
-if __name__ == "__main__":
+@app.route('/review')
+def review():
+    return "復習モードを選択しました"
+
+if __name__ == '__main__':
     app.run(debug=True)
+
 
