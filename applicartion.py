@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -8,7 +8,17 @@ def home():
 
 @app.route('/learning')
 def learning():
-    return "学習モードを選択しました"
+    # 学習モードのページに遷移
+    word_data = {
+        'word': 'study',
+        'meaning': 'to learn about a subject, usually at school or university',
+        'etymology': 'from Latin "studium" meaning zeal, devotion',
+        'synonyms': ['learn', 'examine', 'research'],
+        'antonyms': ['neglect', 'ignore'],
+        'example': 'She is studying hard for her exams.',
+        'mnemonic': 'Think of studying as "steady" work towards your goal.'
+    }
+    return render_template('learning.html', word_data=word_data)
 
 @app.route('/review')
 def review():
@@ -16,5 +26,4 @@ def review():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 

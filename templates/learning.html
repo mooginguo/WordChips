@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Chips - 学習モード</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #FFEECC;
+            padding: 20px;
+        }
+        .container {
+            background-color: #FFDD99;
+            border-radius: 16px;
+            padding: 30px;
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #FF6B6B;
+            margin-bottom: 20px;
+        }
+        .word-section {
+            margin-bottom: 20px;
+        }
+        .word-section h2 {
+            color: #333333;
+            font-size: 22px;
+        }
+        .word-section p {
+            font-size: 18px;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #FF6B6B;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .button:hover {
+            background-color: #FF4D4D;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ word_data['word'] }} の学習</h1>
+
+        <div class="word-section">
+            <h2>意味</h2>
+            <p>{{ word_data['meaning'] }}</p>
+        </div>
+
+        <div class="word-section">
+            <h2>語源</h2>
+            <p>{{ word_data['etymology'] }}</p>
+        </div>
+
+        <div class="word-section">
+            <h2>類義語</h2>
+            <p>{{ word_data['synonyms'] | join(', ') }}</p>
+        </div>
+
+        <div class="word-section">
+            <h2>対義語</h2>
+            <p>{{ word_data['antonyms'] | join(', ') }}</p>
+        </div>
+
+        <div class="word-section">
+            <h2>例文</h2>
+            <p>{{ word_data['example'] }}</p>
+        </div>
+
+        <div class="word-section">
+            <h2>覚え方</h2>
+            <p>{{ word_data['mnemonic'] }}</p>
+        </div>
+
+        <a href="/" class="button">戻る</a>
+    </div>
+</body>
+</html>
