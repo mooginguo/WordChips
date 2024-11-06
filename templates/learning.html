@@ -52,6 +52,99 @@
             background-color: #FF4D4D;
             transform: scale(1.05);
         }
+
+        /* 丸い枠のボタン */
+        .round-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #FF6B6B;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.2s ease;
+        }
+        .round-btn:hover {
+            background-color: #FF4D4D;
+        }
+
+        /* 左右矢印（三角形） */
+        .arrow-left, .arrow-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .arrow-left {
+            left: 10px;
+            border-right: 20px solid #FF6B6B;
+            font-size: 30px;
+        }
+
+        .arrow-right {
+            right: 10px;
+            border-left: 20px solid #FF6B6B;
+            font-size: 30px;
+        }
+
+        .arrow-left:hover, .arrow-right:hover {
+            border-left-color: #FF4D4D;
+            border-right-color: #FF4D4D;
+        }
+
+        .arrow-container {
+            position: relative;
+            margin-top: 20px;
+            height: 50px;
+        }
+
+        /* 例文入力フォーム */
+        .input-form {
+            display: none;
+        }
+
+                /* 画面下部の固定ボタン */
+        .fixed-buttons {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .fixed-btn {
+            width: 60px;
+            height: 60px;
+            background-color: #FF6B6B;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.2s ease;
+        }
+
+        .fixed-btn:hover {
+            background-color: #FF4D4D;
+        }
+
     </style>
 </head>
 <body>
@@ -88,7 +181,46 @@
             <p>{{ word_data['mnemonic'] }}</p>
         </div>
 
-        <a href="/" class="button">戻る</a>
+        <!-- 例文入力フォーム -->
+        <div class="input-form" id="input-form">
+            <h3>あなたが考えた例文を記入してください</h3>
+            <textarea id="example-input" rows="4" cols="50" placeholder="例文を入力..."></textarea><br><br>
+            <button class="button" onclick="gradeExample()">採点</button>
+        </div>
     </div>
+
+    <div class="arrow-container">
+        <a href="{{ url_for('learning', word_index=prev_index) }}" class="arrow-left">◀</a>
+        <a href="{{ url_for('learning', word_index=next_index) }}" class="arrow-right">▶</a>
+    </div>
+
+    <a href="/" class="button">戻る</a>
+
+    <!-- 丸いホームボタンとフレンドボタン -->
+    <div class="fixed-buttons">
+        <a href="/" class="fixed-btn">🏠</a>
+        <a href="/friends" class="fixed-btn">👯</a>
+    </div>
+
+    <!-- 丸いボタン -->
+    <div class="round-btn" onclick="toggleInputForm()">✎</div>
+
+    <script>
+        // 入力フォームを表示/非表示する関数
+        function toggleInputForm() {
+            const form = document.getElementById('input-form');
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // 例文の採点関数
+        function gradeExample() {
+            const inputText = document.getElementById('example-input').value;
+            if(inputText) {
+                alert('採点しました！\nあなたの例文: ' + inputText);
+            } else {
+                alert('例文を入力してください！');
+            }
+        }
+    </script>
 </body>
 </html>

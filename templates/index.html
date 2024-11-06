@@ -64,15 +64,55 @@
             background-color: #FF4D4D;
             transform: scale(1.05);
         }
+
+
+                /* 画面下部の固定ボタン */
+        .fixed-buttons {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .fixed-btn {
+            width: 60px;
+            height: 60px;
+            background-color: #FF6B6B;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.2s ease;
+        }
+
+        .fixed-btn:hover {
+            background-color: #FF4D4D;
+        }
+
     </style>
 </head>
 <body>
     <div class="app-title">Word Chips</div>
     <div class="container">
         <h1>モードを選択してください</h1>
-        <a href="{{ url_for('learning') }}" class="button">学習</a>
-        <a href="{{ url_for('review') }}" class="button">復習</a>
+        <a href="{{ url_for('learning', word_index=0)}}" class="button">学習</a>
+        <a href="{{ url_for('review', word_index=0)}}" class="button">復習</a>
     </div>
+
+
+   <!-- 丸いホームボタンとフレンドボタン -->
+    <div class="fixed-buttons">
+        <a href="/" class="fixed-btn">🏠</a>
+        <a href="/friends" class="fixed-btn">👯</a>
+    </div>
+
 </body>
 </html>
+
 
