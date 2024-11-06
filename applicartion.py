@@ -17,8 +17,6 @@ def main_page1():
     text = "ここはABCです。"
     return render_template("page.html",text=text)
 
-
-
 ## 実行
 if __name__ == "__main__":
     app.run(debug=True)
