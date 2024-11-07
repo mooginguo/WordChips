@@ -9,15 +9,13 @@
 
 /* 学習・復習ボタン */
 .button {
-    display: inline-block;
     background-color: #FF6B6B;
     color: #FFF;
-    font-size: 24px; /* ボタンのフォントサイズを大きく */
-    padding: 15px 30px; /* ボタンのサイズを大きく */
+    font-size: 18px; /* ボタンのフォントサイズを調整 */
+    padding: 10px 20px;
     border-radius: 8px;
     text-align: center;
     text-decoration: none;
-    margin: 20px; /* ボタン間の余白を広く */
     transition: background-color 0.3s ease;
 }
 
