@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>単語復習</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- 上部の固定メニュー -->
+    <header class="fixed-top">
+        <nav>
+            <ul class="icon-menu">
+                <li><a href="/" class="home-icon">🏠</a></li>
+                <li><span class="title">単語復習</span></li>
+                <li><a href="/shuffle" class="shuffle-icon"></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 復習進捗と励ます言葉 -->
+    <div class="learning-status">
+        <p class="word-count">復習した単語: {{ review_progress }} / {{ total_words }}</p>
+        <p class="encouragement-message">素晴らしい！あなたの努力はきっと成果を生むはず！</p>
+    </div>
+
+    <!-- コンテンツ -->
+    <main class="container">
+        <!-- 単語カード表示 -->
+        <div class="word-list">
+            {% for word in words %}
+                <div class="word-tile">
+                    <h2>{{ word['word'] }}</h2>
+                    <p>{{ word['meaning'] }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- 下部の固定メニュー -->
+    <footer class="fixed-bottom">
+        <nav>
+            <ul class="icon-menu">
+                <li><a href="/" class="home-icon">🏠</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+</body>
+</html>

@@ -1,225 +1,60 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Chips - 学習モード</title>
-    <style>
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #FFEECC;
-            padding: 20px;
-        }
-        .container {
-            background-color: #FFDD99;
-            border-radius: 16px;
-            padding: 30px;
-            width: 80%;
-            max-width: 800px;
-            margin: auto;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            color: #FF6B6B;
-            margin-bottom: 20px;
-        }
-        .word-section {
-            margin-bottom: 20px;
-        }
-        .word-section h2 {
-            color: #333333;
-            font-size: 22px;
-        }
-        .word-section p {
-            font-size: 18px;
-        }
-        .button {
-            display: inline-block;
-            padding: 12px 25px;
-            margin-top: 20px;
-            font-size: 18px;
-            color: #ffffff;
-            background-color: #FF6B6B;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-        .button:hover {
-            background-color: #FF4D4D;
-            transform: scale(1.05);
-        }
-
-        /* 丸い枠のボタン */
-        .round-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background-color: #FF6B6B;
-            color: #fff;
-            border-radius: 50%;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.2s ease;
-        }
-        .round-btn:hover {
-            background-color: #FF4D4D;
-        }
-
-        /* 左右矢印（三角形） */
-        .arrow-left, .arrow-right {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .arrow-left {
-            left: 10px;
-            border-right: 20px solid #FF6B6B;
-            font-size: 30px;
-        }
-
-        .arrow-right {
-            right: 10px;
-            border-left: 20px solid #FF6B6B;
-            font-size: 30px;
-        }
-
-        .arrow-left:hover, .arrow-right:hover {
-            border-left-color: #FF4D4D;
-            border-right-color: #FF4D4D;
-        }
-
-        .arrow-container {
-            position: relative;
-            margin-top: 20px;
-            height: 50px;
-        }
-
-        /* 例文入力フォーム */
-        .input-form {
-            display: none;
-        }
-
-                /* 画面下部の固定ボタン */
-        .fixed-buttons {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-        }
-
-        .fixed-btn {
-            width: 60px;
-            height: 60px;
-            background-color: #FF6B6B;
-            color: #fff;
-            border-radius: 50%;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.2s ease;
-        }
-
-        .fixed-btn:hover {
-            background-color: #FF4D4D;
-        }
-
-    </style>
+    <title>英単語学習</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>{{ word_data['word'] }} の学習</h1>
+    <!-- 上部の固定メニュー -->
+    <header class="fixed-top">
+        <nav>
+            <ul class="icon-menu">
+                <li><a href="/" class="home-icon">🏠</a></li>
+                <li><span class="title">英単語学習</span></li>
+                <li><a href="#" class="shuffle-icon">🔄</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <div class="word-section">
-            <h2>意味</h2>
-            <p>{{ word_data['meaning'] }}</p>
+    <!-- 学習状況表示エリア -->
+    <section class="learning-status">
+        <p>学習した単語: <span class="word-count">{{ learned_words_count }}</span>語</p>
+        <p class="encouragement-message">{{ encouragement_message }}</p>
+    </section>
+
+    <!-- コンテンツ -->
+    <main class="container">
+        <!--<h1>英単語学習</h1>-->
+
+        <!-- 英単語リストの表示部分 -->
+        <div class="word-list">
+            {% for word in words %}
+            <a href="/learning/{{ loop.index0 }}" class="{{ 'completed-word-tile' if word['is_completed'] else 'word-tile' }}">
+                <h2>{{ word['word'] }}</h2>
+                <p>{{ word['meaning'] }}</p>
+                <button class="pronounce-btn" onclick="playSound('{{ word['audio_url'] }}'); event.stopPropagation();">🔊</button>
+            </a>
+            {% endfor %}
         </div>
+    </main>
 
-        <div class="word-section">
-            <h2>語源</h2>
-            <p>{{ word_data['etymology'] }}</p>
-        </div>
+    <!-- 下部の固定メニュー -->
+    <footer class="fixed-bottom">
+        <nav>
+            <ul class="icon-menu">
+                <li><a href="/" class="home-icon">🏠</a></li>
+                <li><a href="#" class="shuffle-icon">🔄</a></li>
+            </ul>
+        </nav>
+    </footer>
 
-        <div class="word-section">
-            <h2>類義語</h2>
-            <p>{{ word_data['synonyms'] | join(', ') }}</p>
-        </div>
-
-        <div class="word-section">
-            <h2>対義語</h2>
-            <p>{{ word_data['antonyms'] | join(', ') }}</p>
-        </div>
-
-        <div class="word-section">
-            <h2>例文</h2>
-            <p>{{ word_data['example'] }}</p>
-        </div>
-
-        <div class="word-section">
-            <h2>覚え方</h2>
-            <p>{{ word_data['mnemonic'] }}</p>
-        </div>
-
-        <!-- 例文入力フォーム -->
-        <div class="input-form" id="input-form">
-            <h3>あなたが考えた例文を記入してください</h3>
-            <textarea id="example-input" rows="4" cols="50" placeholder="例文を入力..."></textarea><br><br>
-            <button class="button" onclick="gradeExample()">採点</button>
-        </div>
-    </div>
-
-    <div class="arrow-container">
-        <a href="{{ url_for('learning', word_index=prev_index) }}" class="arrow-left">◀</a>
-        <a href="{{ url_for('learning', word_index=next_index) }}" class="arrow-right">▶</a>
-    </div>
-
-    <a href="/" class="button">戻る</a>
-
-    <!-- 丸いホームボタンとフレンドボタン -->
-    <div class="fixed-buttons">
-        <a href="/" class="fixed-btn">🏠</a>
-        <a href="/friends" class="fixed-btn">👯</a>
-    </div>
-
-    <!-- 丸いボタン -->
-    <div class="round-btn" onclick="toggleInputForm()">✎</div>
-
+    <!-- 発音用のJavaScript -->
     <script>
-        // 入力フォームを表示/非表示する関数
-        function toggleInputForm() {
-            const form = document.getElementById('input-form');
-            form.style.display = form.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // 例文の採点関数
-        function gradeExample() {
-            const inputText = document.getElementById('example-input').value;
-            if(inputText) {
-                alert('採点しました！\nあなたの例文: ' + inputText);
-            } else {
-                alert('例文を入力してください！');
-            }
+        function playSound(url) {
+            const audio = new Audio(url);
+            audio.play();
         }
     </script>
 </body>

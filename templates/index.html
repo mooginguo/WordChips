@@ -4,112 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Chips</title>
-    <style>
-        /* 全体の設定 */
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #FFEECC;
-            padding-top: 20px; /* スクロールを避けるために少し余白を追加 */
-        }
-        /* アプリ名の設定 */
-        .app-title {
-            font-size: 36px;
-            font-weight: bold;
-            color: #FF6B6B;
-            margin-bottom: 40px;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            top: 20px;  /* 画面の一番上に配置 */
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        /* コンテナの設定 */
-        .container {
-            text-align: center;
-            padding: 30px;
-            background-color: #FFDD99;
-            border-radius: 16px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            width: 350px;
-            margin-top: 100px; /* タイトルの下に少し余白を空ける */
-        }
-        /* タイトルの設定 */
-        h1 {
-            font-size: 20px;
-            margin-bottom: 30px;
-            color: #333333;
-        }
-        /* ボタンの設定 */
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            margin: 15px;
-            font-size: 18px;
-            color: #ffffff;
-            background-color: #FF6B6B;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-        /* ホバー時のボタンの色とサイズ */
-        .button:hover {
-            background-color: #FF4D4D;
-            transform: scale(1.05);
-        }
-
-
-                /* 画面下部の固定ボタン */
-        .fixed-buttons {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-        }
-
-        .fixed-btn {
-            width: 60px;
-            height: 60px;
-            background-color: #FF6B6B;
-            color: #fff;
-            border-radius: 50%;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.2s ease;
-        }
-
-        .fixed-btn:hover {
-            background-color: #FF4D4D;
-        }
-
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="app-title">Word Chips</div>
     <div class="container">
         <h1>モードを選択してください</h1>
-        <a href="{{ url_for('learning', word_index=0)}}" class="button">学習</a>
-        <a href="{{ url_for('review', word_index=0)}}" class="button">復習</a>
-    </div>
-
-
-   <!-- 丸いホームボタンとフレンドボタン -->
-    <div class="fixed-buttons">
-        <a href="/" class="fixed-btn">🏠</a>
-        <a href="/friends" class="fixed-btn">👯</a>
+        <div class="button-container">
+            <a href="{{ url_for('learning') }}" class="button">学習</a>
+            <a href="{{ url_for('review') }}" class="button">復習</a>
+        </div>
     </div>
 
 </body>

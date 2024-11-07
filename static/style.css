@@ -1,0 +1,237 @@
+/* アプリのタイトル */
+.app-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #FF6B6B;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 学習・復習ボタン */
+.button {
+    display: inline-block;
+    background-color: #FF6B6B;
+    color: #FFF;
+    font-size: 24px; /* ボタンのフォントサイズを大きく */
+    padding: 15px 30px; /* ボタンのサイズを大きく */
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    margin: 20px; /* ボタン間の余白を広く */
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #FF4D4D;
+}
+
+/* ボタンの中央揃え */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* ボタン間のスペース */
+    margin-top: 30px;
+}
+
+/* Word Chips 表示用 */
+.word-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.word-chip {
+    background-color: #FFF8E1;
+    border: 1px solid #FFDD99;
+    border-radius: 16px;
+    padding: 8px 12px;
+    color: #333;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.word-chip:hover {
+    transform: translateY(-3px);
+    background-color: #FFEECC;
+}
+
+
+/* 全体のフォントと背景色 */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #FFEECC;
+    padding: 20px;
+}
+
+.container {
+    background-color: #FFDD99;
+    border-radius: 16px;
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #FF6B6B;
+    margin-bottom: 20px;
+}
+
+/* 上部および下部固定メニュー */
+.fixed-top, .fixed-bottom {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    background-color: #FFDD99;
+    padding: 10px 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.fixed-top {
+    top: 0;
+}
+
+.fixed-bottom {
+    bottom: 0;
+}
+
+.icon-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+}
+
+.icon-menu li {
+    margin: 0;
+}
+
+.icon-menu .title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FF6B6B;
+}
+
+.icon-menu a {
+    font-size: 24px;
+    text-decoration: none;
+    color: #FF6B6B;
+}
+
+/* タイル全体のスタイル */
+.word-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding-top: 20px;
+}
+
+/* タイル個々のスタイル */
+.word-tile {
+    background-color: #FFF8E1; /* 通常の単語タイルの背景色 */
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+.word-tile:hover {
+    transform: translateY(-5px);
+}
+
+/* 勉強済みの単語タイルスタイル */
+.completed-word-tile {
+    background-color: #CCCCCC; /* 勉強済みタイルの背景色をグレーに */
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+.completed-word-tile:hover {
+    transform: translateY(-5px);
+}
+
+/* タイルのテキストスタイル */
+.word-tile h2, .completed-word-tile h2 {
+    font-size: 20px;
+    color: #FF6B6B;
+    margin-bottom: 8px;
+}
+
+.word-tile p, .completed-word-tile p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 発音ボタン */
+.pronounce-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #FF6B6B;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.pronounce-btn:hover {
+    color: #FF4D4D;
+}
+
+/* コンテンツとメニューの余白 */
+main {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-align: center;
+}
+
+/* 学習状況表示エリアのスタイル */
+.learning-status {
+    background-color: #FFDD99;
+    border-radius: 12px;
+    padding: 15px;
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.learning-status p {
+    font-size: 18px;
+    color: #FF6B6B;
+    margin: 8px 0;
+}
+
+.word-count {
+    font-size: 22px;
+    font-weight: bold;
+    color: #FF4D4D;
+}
+
+.encouragement-message {
+    font-size: 20px;
+    color: #FF6B6B;
+    font-style: italic;
+}
+
+
+

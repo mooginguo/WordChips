@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Chips - 学習モード</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- 上部の固定メニュー -->
+    <header class="fixed-top">
+        <nav>
+            <ul class="icon-menu">
+                <li><a href="/learning" class="home-icon">👈</a></li>
+                <li><span class="title">{{ word_data['word'] }} の学習</span></li>
+                <li><a href="/shuffle" class="shuffle-icon"></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <div class="word-section">
+            <h2>意味</h2>
+            <p>{{ word_data['meaning'] }}</p>
+        </div>
+
+        <div class="word-section">
+            <h2>語源</h2>
+            <p>{{ word_data['etymology'] }}</p>
+        </div>
+
+        <div class="word-section">
+            <h2>類義語</h2>
+            <p>{{ word_data['synonyms'] | join(', ') }}</p>
+        </div>
+
+        <div class="word-section">
+            <h2>対義語</h2>
+            <p>{{ word_data['antonyms'] | join(', ') }}</p>
+        </div>
+
+        <div class="word-section">
+            <h2>例文</h2>
+            <p>{{ word_data['example'] }}</p>
+        </div>
+
+        <div class="word-section">
+            <h2>覚え方</h2>
+            <p>{{ word_data['mnemonic'] }}</p>
+        </div>
+
+        <!-- 他人の例文セクション -->
+        <div class="word-section">
+            <h2>他人の例文</h2>
+            {% for example in other_examples %}
+            <div class="example">
+                <p><strong>例文:</strong> {{ example['text'] }}</p>
+                <p><strong>AI評価:</strong> {{ example['ai_rating'] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- 自分の例文入力セクション -->
+        <div class="word-section">
+            <h2>自分の例文</h2>
+            <textarea id="example-input" placeholder="ここにあなたの例文を入力してください" rows="3" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+            <button onclick="gradeExample()" style="margin-top: 10px; padding: 10px 20px; background-color: #FF6B6B; color: white; border: none; border-radius: 5px; cursor: pointer;">AI評価</button>
+        </div>
+
+    </div>
+
+
+    <!-- 下部の固定メニュー -->
+    <footer class="fixed-bottom">
+        <nav>
+            <ul class="icon-menu">
+                <li><a href="/learning" class="home-icon">👈</a></li>
+                <li><span class="title"></span></li>
+                <li><a href="#" class="shuffle-icon">✔</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+     <script>
+        // 例文のAI評価関数
+        function gradeExample() {
+            const inputText = document.getElementById('example-input').value;
+            if(inputText) {
+                // ここで例文のAI評価をリクエストする処理を追加
+                alert('AI評価中です...\nあなたの例文: ' + inputText);
+            } else {
+                alert('例文を入力してください！');
+            }
+        }
+    </script>
+</body>
+</html>
