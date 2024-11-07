@@ -245,45 +245,4 @@ main {
     font-style: italic;
 }
 
-/* レスポンシブデザイン調整 */
-@media (max-width: 768px) {
-    /* タイトルやボタンのサイズを調整 */
-    .app-title {
-        font-size: 20px;
-    }
-
-    h1 {
-        font-size: 18px;
-    }
-
-    .button {
-        font-size: 16px; /* ボタンのフォントサイズをさらに小さく */
-        padding: 8px 16px;
-    }
-
-    .motivation-message p {
-        font-size: 14px; /* メッセージのフォントサイズも調整 */
-    }
-}
-
-@media (max-width: 480px) {
-    /* スマホ画面向けの調整 */
-    .app-title {
-        font-size: 18px;
-    }
-
-    h1 {
-        font-size: 16px;
-    }
-
-    .button {
-        font-size: 14px;
-        padding: 8px 12px;
-    }
-
-    .motivation-message p {
-        font-size: 12px; /* メッセージのフォントサイズを小さく */
-    }
-}
-
 
